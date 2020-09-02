@@ -8,3 +8,7 @@ secrets*
 variables*
 .terraform*
 .vscode/
+
+**/*.exe
+
+*.tfvars

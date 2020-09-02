@@ -6,11 +6,11 @@ resource "aws_security_group" "allow_connections_jitsi-meet" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = concat(formatlist("%s/32", list(chomp(data.http.external_ip.body))), var.ip_whitelist)
+    cidr_blocks = var.ssh_ip_whitelist
   }
   ingress {
     from_port   = 10000
-    to_port     = 10000
+    to_port     = 65535
     protocol    = "udp"
     cidr_blocks = ["0.0.0.0/0"]
   }
@@ -27,21 +27,9 @@ resource "aws_security_group" "allow_connections_jitsi-meet" {
     cidr_blocks = ["0.0.0.0/0"]
   }
   egress {
-    from_port   = 80
-    to_port     = 80
-    protocol    = "6"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-  egress {
-    from_port   = 443
-    to_port     = 443
-    protocol    = "6"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-  egress {
-    from_port   = 53
-    to_port     = 53
-    protocol    = "udp"
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
   tags = {

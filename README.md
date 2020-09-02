@@ -4,59 +4,42 @@
 - You know your AWS access and secret keys. [Official Documentation](https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html)
 - You created an AWS SSH Key. [Official Documentation](https://docs.aws.amazon.com/ground-station/latest/ug/create-ec2-ssh-key-pair.html)
 - You allocated a Elastic IP in AWS.
-- You own a domain Name and created a A Record entry for the Elastic IP.
+- You own a domain Name and created a a record entry for the Elastic IP.
+- You created an S3 bucket with name `tfstate-jitsi`. Choose standard encryption and place in `eu-central-1` (otherwise change `tfstate.tf`)
 
-# Setup
+## Setup
 
-1. Create a variables.tf file.
-2. Copy example Content in Variables file.
-3. Enter your own data.
-4. Execute `terraform init`
-5. Execute `terraform apply`
+1. create a file `credentials` in `~/.aws` (Unix) or `%HOMEPATH%\.aws` (Windows), see below
+2. Create a `terraform.tfvars` file (see below).
+3. Copy example Content in Variables file.
+4. Enter your own data.
+5. Execute `terraform init` (Use `terraform init -reconfigure` if you changed the backend)
+6. Execute `terraform apply`
 
-variables.tf file:
+## Files
 
+### `credentials` file
+
+```properties
+[default]
+aws_access_key_id = put-your-access-key-id
+aws_secret_access_key = put-your-secret-access-key
 ```
-variable "aws_access_key" {
-  description = "Access key from AWS"
-  default = "D0NTPV5HCR3DST0G1THVB"
-}
-variable "aws_secret_key" {
-  description = "Secret key from AWS"
-  default = "D0NTPV5HCR3DST0G1THVB"
-}
-variable "aws_region" {
-  description = "Region where the instance should be located"
-  default = "eu-central-1"
-}
-variable "ssh_key_path" {
-  description = "Path to the AWS SSH key"
-  default = "C:/Users/...."
-}
-variable "instance_type" {
-  description = "Instance type to launch"
-  default = "t2.large"
-}
-variable "ssh_key_name" {
-  description = "Name of the SSH key"
-  default = "terraform-key"
-}
-variable "ip_whitelist" {
-  description = "All allowed ingress IPs"
-  default = ["1.3.3.7/32"]
-}
-variable "eip" {
-  description = "Elastic IP associated with the instance"
-  default     = "3.126.129.69"
-}
-variable "email_address" {
-  description = "Email to use for the certificate generation"
-  default     = "user@domain.de"
-}
-variable "domain_name" {
-  description = "Domain of the Jitsi Server"
-  default     = "jitsi.example.com"
-}
+
+### `terraform.tfvars` file
+
+```properties
+aws_region = "eu-central-1"
+
+instance_type = "t2.large"
+
+ssh_key_name = "terraform-key"
+ssh_ip_whitelist = ["1.3.3.7/32"]
+eip     = "1.3.3.7"
+email_address     = "user@domain.de"
+domain_name     = "jitsi.example.com"
+tfstate_s3_bucket = "tfstate.example.com"
+
 ```
 
 ## References
