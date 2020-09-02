@@ -1,4 +1,10 @@
-# Requirements
+# JITSI-AWS
+
+Create a [JITSI-Server](https://jitsi.org/) in the AWS cloud.
+
+Work derived from https://github.com/AvasDream/terraform_aws_jitsi_meet
+
+## Requirements
 
 - Terraform is installed and in the current \$PATH
 - You know your AWS access and secret keys. [Official Documentation](https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html)
@@ -30,16 +36,14 @@ aws_secret_access_key = put-your-secret-access-key
 
 ```properties
 aws_region = "eu-central-1"
-
 instance_type = "t2.large"
-
 ssh_key_name = "terraform-key"
 ssh_ip_whitelist = ["1.3.3.7/32"]
 eip     = "1.3.3.7"
 email_address     = "user@domain.de"
 domain_name     = "jitsi.example.com"
 tfstate_s3_bucket = "tfstate.example.com"
-
+tfstate_s3_key = "jitsi/tfstate"
 ```
 
 ## References
