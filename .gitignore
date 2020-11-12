@@ -5,7 +5,6 @@
 *.backup
 *_key
 secrets*
-variables*
 .terraform*
 .vscode/
 
