@@ -1,5 +1,5 @@
 data "template_file" "install_script" {
-  template = "${file("install_jitsi.tpl")}"
+  template = file("install_jitsi.tpl")
   vars = {
     email_address = var.email_address
     domain_name   = var.domain_name
