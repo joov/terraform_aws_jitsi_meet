@@ -11,10 +11,6 @@ variable "ssh_key_name" {
   description = "Name of the SSH key"
   default = "terraform-key"
 }
-variable "ssh_ip_whitelist" {
-  description = "All allowed ingress IPs"
-  default = ["1.3.3.7/32"]
-}
 variable "eip" {
   description = "Elastic IP associated with the instance"
 }
