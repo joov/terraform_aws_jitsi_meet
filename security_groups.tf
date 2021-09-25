@@ -4,7 +4,7 @@ resource "aws_security_group" "allow_connections_jitsi-meet" {
 
   ingress {
     from_port   = 10000
-    to_port     = 65535
+    to_port     = 10000
     protocol    = "udp"
     cidr_blocks = ["0.0.0.0/0"]
   }
